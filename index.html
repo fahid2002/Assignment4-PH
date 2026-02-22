@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+
+<body class="bg-gray-100">
+
+<div class="pt-[60px] pb-[60px] px-6 lg:px-[245px]">
+
+    <h1 class="text-3xl font-bold mb-10">Job Application Tracker</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+
+        <div class="bg-white p-6 rounded shadow">
+            <p>Total Jobs</p>
+            <h2 id="totalCount" class="text-2xl font-bold">0</h2>
+        </div>
+
+        <div class="bg-blue-100 p-6 rounded shadow">
+            <p>Interview</p>
+            <h2 id="interviewCount" class="text-2xl font-bold">0</h2>
+        </div>
+
+        <div class="bg-red-100 p-6 rounded shadow">
+            <p>Rejected</p>
+            <h2 id="rejectedCount" class="text-2xl font-bold">0</h2>
+        </div>
+
+    </div>
+
+
+    <div class="flex justify-between mb-6">
+        <h2 class="text-2xl font-bold">Available Jobs</h2>
+        <span id="tabCount">0 Jobs</span>
+    </div>
+
+    <div class="mb-8">
+        <button onclick="changeTab('all')" id="allTab"
+            class="bg-black text-white px-4 py-2 rounded">All</button>
+
+        <button onclick="changeTab('interview')" id="interviewTab"
+            class="bg-gray-200 px-4 py-2 rounded">Interview</button>
+
+        <button onclick="changeTab('rejected')" id="rejectedTab"
+            class="bg-gray-200 px-4 py-2 rounded">Rejected</button>
+    </div>
+
+
+    <div id="jobsContainer"></div>
+
+
+    <div id="emptyMessage" class="hidden text-center mt-10">
+        <h3 class="text-xl font-bold">No Jobs Available</h3>
+        <p class="text-gray-500">No jobs in this tab.</p>
+    </div>
+
+</div>
+
+
+</body>
+</html>
