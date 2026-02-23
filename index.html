@@ -75,7 +75,51 @@ var jobs = [
     {id:7, company:"StartupXYZ", position:"Full Stack Engineer", location:"Remote", type:"Full-time", salary:"$120,000 - $160,000", description:"Join our fast-growing startup and work on our core platform. Experience with Node.js and React required. Great benefits and equity package included.", status:"all"},
     {id:8, company:"TechCorp Industries", position:"Senior Frontend Developer", location:"San Francisco, CA", type:"Full-time", salary:"$130,000 - $175,000", description:"We are looking for an experienced Frontend Developer to build scalable web applications using React and TypeScript. You will work with a talented team on cutting-edge projects.", status:"all"}
 ];
+function showJobs() {
+    var container = document.getElementById("jobsContainer");
+    container.innerHTML = "";
 
+    var count = 0;
+
+    for (var i = 0; i < jobs.length; i++) {
+        if (currentTab == "all" || jobs[i].status == currentTab) {
+
+            count++;
+            
+            container.innerHTML +=
+            `<div class="bg-gray-50 border border-gray-200 p-6 rounded-xl mb-6 flex flex-col md:flex-row justify-between relative">
+
+                <!-- Delete button -->
+                <button onclick="deleteJob(${jobs[i].id})" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-lg">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+
+                <div class="flex-1">
+
+                    <h3 class="font-bold text-lg text-gray-800">${jobs[i].company}</h3>
+                    <p class="text-gray-600 mt-1">${jobs[i].position}</p>
+                    <p class="text-sm text-gray-500 mt-1">${jobs[i].location} • ${jobs[i].type} • ${jobs[i].salary}</p>
+
+                    <!-- NOT APPLIED badge -->
+                    <div class="mt-3">
+                        <span class="bg-blue-100 text-black text-2xs px-3 py-1 rounded">NOT APPLIED</span>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="text-sm text-gray-600 mt-2">${jobs[i].description}</p>
+
+                    <!-- Buttons -->
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <button onclick="setInterview(${jobs[i].id})" class="border border-green-500 font-bold-400 text-green-600 px-4 py-1 rounded hover:bg-green-200">INTERVIEW</button>
+                        <button onclick="setRejected(${jobs[i].id})" class="border border-red-500 text-red-600 px-4 py-1 rounded hover:bg-red-200">REJECTED</button>
+                        
+                    </div>
+
+                </div>
+            </div>`;
+        }
+    }
+}
 
 </script>
 
