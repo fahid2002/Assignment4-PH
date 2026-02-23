@@ -116,6 +116,16 @@ function showJobs() {
             </div>
         }
     }
+    document.getElementById("tabCount").innerText = count + " Jobs";
+
+    if (count == 0) {
+        document.getElementById("emptyMessage").classList.remove("hidden");
+    } else {
+        document.getElementById("emptyMessage").classList.add("hidden");
+    }
+
+    updateDashboard();
+
 }
 
 </script>
