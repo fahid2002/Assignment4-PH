@@ -88,7 +88,7 @@ function showJobs() {
             count++;
             
             container.innerHTML +=
-            <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl mb-6 flex flex-col md:flex-row justify-between relative">
+            `<div class="bg-gray-50 border border-gray-200 p-6 rounded-xl mb-6 flex flex-col md:flex-row justify-between relative">
 
                 <!-- Delete button -->
                 <button onclick="deleteJob(${jobs[i].id})" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-lg">
@@ -101,22 +101,26 @@ function showJobs() {
                     <p class="text-gray-600 mt-1">${jobs[i].position}</p>
                     <p class="text-sm text-gray-500 mt-1">${jobs[i].location} • ${jobs[i].type} • ${jobs[i].salary}</p>
 
-                
+                    <!-- NOT APPLIED badge -->
                     <div class="mt-3">
                         <span class="bg-blue-100 text-black text-2xs px-3 py-1 rounded">NOT APPLIED</span>
                     </div>
 
+                    <!-- Description -->
                     <p class="text-sm text-gray-600 mt-2">${jobs[i].description}</p>
 
+                    <!-- Buttons -->
                     <div class="mt-4 flex flex-wrap gap-2">
                         <button onclick="setInterview(${jobs[i].id})" class="border border-green-500 font-bold-400 text-green-600 px-4 py-1 rounded hover:bg-green-200">INTERVIEW</button>
                         <button onclick="setRejected(${jobs[i].id})" class="border border-red-500 text-red-600 px-4 py-1 rounded hover:bg-red-200">REJECTED</button>
                         
                     </div>
+
                 </div>
-            </div>
+            </div>`;
         }
     }
+
     document.getElementById("tabCount").innerText = count + " Jobs";
 
     if (count == 0) {
@@ -127,6 +131,7 @@ function showJobs() {
 
     updateDashboard();
 }
+
 function setInterview(id) {
 
     for (var i = 0; i < jobs.length; i++) {
@@ -148,6 +153,53 @@ function setRejected(id) {
 
     showJobs();
 }
+
+function deleteJob(id) {
+
+    for (var i = 0; i < jobs.length; i++) {
+        if (jobs[i].id == id) {
+            jobs.splice(i, 1);
+            break;
+        }
+    }
+
+    showJobs();
+}
+
+function changeTab(tabName) {
+
+    currentTab = tabName;
+
+    document.getElementById("allTab").className = "bg-gray-200 px-4 py-2 rounded";
+    document.getElementById("interviewTab").className = "bg-gray-200 px-4 py-2 rounded";
+    document.getElementById("rejectedTab").className = "bg-gray-200 px-4 py-2 rounded";
+
+    document.getElementById(tabName + "Tab").className = "bg-black text-white px-4 py-2 rounded";
+
+    showJobs();
+}
+
+function updateDashboard() {
+
+    document.getElementById("totalCount").innerText = jobs.length;
+
+    var interview = 0;
+    var rejected = 0;
+
+    for (var i = 0; i < jobs.length; i++) {
+        if (jobs[i].status == "interview") {
+            interview++;
+        }
+        if (jobs[i].status == "rejected") {
+            rejected++;
+        }
+    }
+
+    document.getElementById("interviewCount").innerText = interview;
+    document.getElementById("rejectedCount").innerText = rejected;
+}
+
+showJobs();
 
 
 </script>
